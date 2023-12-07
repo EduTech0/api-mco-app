@@ -74,7 +74,7 @@ Route::prefix('cederas')->controller(CederaController::class)->group(function ()
 });
 
 // ---PENDAFTARAN--- //
-Route::prefix('daftar')->controller(PendaftaranController::class)->group(function () {
+Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(function () {
     // All Pendaftarans
     Route::get('/', 'index');
     // Pendaftaran berdasarkan User

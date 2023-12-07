@@ -25,8 +25,8 @@ return new class extends Migration
             $table->enum('olahraga', ['Hobi', 'Atlet', 'Lainnya']);
             $table->string('cabang');
             $table->string('penyebab');
-            $table->enum('lama_cedera', ['<1minggu', '<1bulan', '<1tahun', '>1tahun']);
-            $table->enum('jumlah_terapi', ['belum', '1kali', '>1kali']);
+            $table->enum('lama_cedera', ['<1 Minggu', '<1 Bulan', '<1 Tahun', '>1 Tahun']);
+            $table->enum('jumlah_terapi', ['Belum', '1 Kali', '>1 Kali']);
             $table->boolean('status');
             $table->timestamps();
         });
