@@ -18,8 +18,8 @@ class JadwalFactory extends Factory
     {
         return [
             'tanggal' => fake()->date(),
-            'waktu1' => fake()->time('H:i', '09:00'),
-            'waktu2' => fake()->time('H:i', '10:00'),
+            'waktu_1' => fake()->time('H:i', '09:00'),
+            'waktu_2' => fake()->time('H:i', '10:00'),
             'kuota' => fake()->numberBetween(4, 10),
             'tersisa' => fake()->numberBetween(0, 10),
         ];

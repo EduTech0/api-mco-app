@@ -27,8 +27,8 @@ class JadwalController extends Controller
         // Validate Request
         $validatedData = $request->validate([
             'tanggal' => 'required|date',
-            'waktu1' => 'required',
-            'waktu2' => 'required',
+            'waktu_1' => 'required',
+            'waktu_2' => 'required',
             'kuota' => 'required|integer',
         ]);
         $validatedData['tersisa'] = $request->kuota;
@@ -62,8 +62,8 @@ class JadwalController extends Controller
         // Validate Request
         $validatedData = $request->validate([
             'tanggal' => 'required|date',
-            'waktu1' => 'required',
-            'waktu2' => 'required',
+            'waktu_1' => 'required',
+            'waktu_2' => 'required',
             'kuota' => 'required|integer',
             'tersisa' => 'required|integer',
         ]);

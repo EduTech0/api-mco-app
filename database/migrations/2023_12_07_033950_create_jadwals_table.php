@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('waktu1');
-            $table->string('waktu2');
+            $table->string('waktu_1');
+            $table->string('waktu_2');
             $table->integer('kuota');
             $table->integer('tersisa');
             $table->timestamps();
