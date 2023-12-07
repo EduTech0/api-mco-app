@@ -85,10 +85,10 @@ class PendaftaranController extends Controller
             'usia' => 'required|integer',
             'pekerjaan' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'nomor' => 'required|min:8|max:12|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'nomor' => 'required|min:8|max:14|regex:/^([0-9\s\-\+\(\)]*)$/',
             'olahraga' => 'required|string',
             'cabang' => 'required|string',
-            'cedera' => 'required|integer',
+            'cedera' => 'integer',
             'penyebab' => 'required|string|max:255',
             'lama_cedera' => 'required|string',
             'jumlah_terapi' => 'required|string',
@@ -96,7 +96,7 @@ class PendaftaranController extends Controller
         ]);
         $validatedData['user_id'] = auth()->id();
 
-        $pendaftaran->cedera()->sync($request->cedera);
+        $pendaftaran->cedera()->sync($request->cederas);
         $pendaftaran->update($validatedData);
 
         return response()->json([
