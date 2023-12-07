@@ -27,15 +27,15 @@ class CederaController extends Controller
     {
         // Validate Request
         $validatedData = $request->validate([
-            'images' => 'image|file|max:2048',
+            'image' => 'image|file|max:2048',
             'name' => 'required|string|max:255',
             'harga' => 'required|integer'
         ]);
-        // Request Images
-        if ($request->hasFile('images')) {
-            $newImage = $request->images->getClientOriginalName();
-            $request->images->storeAs('public/cederas', $newImage);
-            $data['images'] = $newImage;
+        // Request Image
+        if ($request->hasFile('image')) {
+            $newImage = $request->image->getClientOriginalName();
+            $request->image->storeAs('public/cederas', $newImage);
+            $data['image'] = $newImage;
         }
 
         $cedera = Cedera::create($validatedData);
@@ -66,15 +66,15 @@ class CederaController extends Controller
     {
         // Validate Request
         $validatedData = $request->validate([
-            'images' => 'max:2048',
+            'image' => 'max:2048',
             'name' => 'required|string|max:255',
             'harga' => 'required|integer'
         ]);
-        // Request Images
-        if ($request->hasFile('images')) {
-            $newImage = $request->images->getClientOriginalName();
-            $request->images->storeAs('public/images', $newImage);
-            $data['images'] = $newImage;
+        // Request Image
+        if ($request->hasFile('image')) {
+            $newImage = $request->image->getClientOriginalName();
+            $request->image->storeAs('public/cederas', $newImage);
+            $data['image'] = $newImage;
         }
 
         $cedera->update($validatedData);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cederas', function (Blueprint $table) {
             $table->id();
-            $table->string('images');
+            $table->string('image');
             $table->string('name');
             $table->integer('harga');
             $table->timestamps();

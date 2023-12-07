@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_id');
             $table->string('nama_lengkap');
             $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan']);
             $table->integer('berat');

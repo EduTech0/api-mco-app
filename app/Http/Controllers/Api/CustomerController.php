@@ -71,7 +71,6 @@ class CustomerController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->pendaftarans()->detach();
         $user->delete();
 
         return response()->json([

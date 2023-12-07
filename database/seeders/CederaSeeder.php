@@ -16,62 +16,62 @@ class CederaSeeder extends Seeder
         Cedera::create([
             'name' => 'Cedera Piriformis Syndrom',
             'harga' => '350000',
-            'images' => 'Piriformis Syndrom.png'
+            'image' => 'Piriformis Syndrom.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Pergelangan Tangan',
             'harga' => '200000',
-            'images' => 'Pergelangan Tangan.png'
+            'image' => 'Pergelangan Tangan.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Siku',
             'harga' => '200000',
-            'images' => 'Siku.png'
+            'image' => 'Siku.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Lutut',
             'harga' => '250000',
-            'images' => 'Lutut.png'
+            'image' => 'Lutut.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Leher',
             'harga' => '200000',
-            'images' => 'Leher.png'
+            'image' => 'Leher.png'
         ]);
         Cedera::create([
             'name' => 'Cedera LBP',
             'harga' => '300000',
-            'images' => 'LBP.png'
+            'image' => 'LBP.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Panggul',
             'harga' => '200000',
-            'images' => 'Panggul.png'
+            'image' => 'Panggul.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Jari Tangan',
             'harga' => '200000',
-            'images' => 'Jari Tangan.png'
+            'image' => 'Jari Tangan.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Angkle',
             'harga' => '200000',
-            'images' => 'Angkle.png'
+            'image' => 'Angkle.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Punggung',
             'harga' => '250000',
-            'images' => 'Punggung.png'
+            'image' => 'Punggung.png'
         ]);
         Cedera::create([
             'name' => 'Cedera HNP',
             'harga' => '350000',
-            'images' => 'HNP.png'
+            'image' => 'HNP.png'
         ]);
         Cedera::create([
             'name' => 'Cedera Bahu',
             'harga' => '250000',
-            'images' => 'Bahu.png'
+            'image' => 'Bahu.png'
         ]);
     }
 }
