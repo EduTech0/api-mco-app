@@ -91,6 +91,7 @@ class CederaController extends Controller
      */
     public function destroy(Cedera $cedera)
     {
+        $cedera->pendaftarans()->detach();
         $cedera->delete();
 
         return response()->json([
