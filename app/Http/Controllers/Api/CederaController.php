@@ -33,9 +33,9 @@ class CederaController extends Controller
         ]);
         // Request Image
         if ($request->hasFile('image')) {
-            $newImage = $request->image->getClientOriginalName();
-            $request->image->storeAs('public/cederas', $newImage);
-            $data['image'] = $newImage;
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('public/cederas', $filename);
+            $validatedData['image'] = $filename;
         }
 
         $cedera = Cedera::create($validatedData);
@@ -62,28 +62,28 @@ class CederaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cedera $cedera)
-    {
-        // Validate Request
-        $validatedData = $request->validate([
-            'image' => 'max:2048',
-            'name' => 'required|string|max:255',
-            'harga' => 'required|integer'
-        ]);
-        // Request Image
-        if ($request->hasFile('image')) {
-            $newImage = $request->image->getClientOriginalName();
-            $request->image->storeAs('public/cederas', $newImage);
-            $data['image'] = $newImage;
-        }
+        public function update(Request $request, Cedera $cedera)
+        {
+            // Validate Request
+            $validatedData = $request->validate([
+                'image' => 'max:2048',
+                'name' => 'required|string|max:255',
+                'harga' => 'required|integer'
+            ]);
+            // Request Image
+            if ($request->hasFile('image')) {
+                $filename = $request->image->getClientOriginalName();
+                $request->image->storeAs('public/cederas', $filename);
+                $data['image'] = asset('storage/cederas/' . $filename);;
+            }
 
-        $cedera->update($validatedData);
+            $cedera->update($validatedData);
 
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Cedera Updated Successfully.',
-            'data' => $cedera
-        ]);
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Cedera Updated Successfully.',
+                'data' => $cedera
+            ]);
     }
 
     /**

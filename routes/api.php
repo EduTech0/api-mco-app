@@ -41,14 +41,14 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 
 // ---PROFILE--- //
 Route::prefix('profile')->controller(CustomerController::class)->middleware('auth:sanctum')->group(function () {
-    // Profile Customer
+    // Show Profile
     Route::get('/', 'profile');
-    // Profile
+    // Edit Profile
     Route::put('/edit', 'editProfile');
 });
 
 // ---CUSTOMER--- //
-Route::prefix('customers')->controller(CustomerController::class)->group(function () {
+Route::prefix('customer')->controller(CustomerController::class)->group(function () {
     // All Customers
     Route::get('/', 'index');
     // Create Customer
@@ -60,7 +60,7 @@ Route::prefix('customers')->controller(CustomerController::class)->group(functio
 });
 
 // ---CEDERA--- //
-Route::prefix('cederas')->controller(CederaController::class)->group(function () {
+Route::prefix('cedera')->controller(CederaController::class)->group(function () {
     // All Cederas
     Route::get('/', 'index');
     // Show 1 Cedera
@@ -71,6 +71,20 @@ Route::prefix('cederas')->controller(CederaController::class)->group(function ()
     Route::put('/edit/{cedera}', 'update')->middleware('auth:sanctum');
     // Delete Cedera
     Route::delete('/delete/{cedera}', 'destroy')->middleware('auth:sanctum');
+});
+
+// ---JADWAL--- //
+Route::prefix('jadwal')->controller(JadwalController::class)->group(function () {
+    // All Jadwals
+    Route::get('/', 'index');
+    // Show 1 Jadwal
+    Route::get('/{id}', 'show');
+    // Create Jadwal
+    Route::post('/create', 'store')->middleware('auth:sanctum');
+    // Edit Jadwal
+    Route::put('/edit/{jadwal}', 'update')->middleware('auth:sanctum');
+    // Delete Jadwal
+    Route::delete('/delete/{jadwal}', 'destroy')->middleware('auth:sanctum');
 });
 
 // ---PENDAFTARAN--- //
@@ -89,18 +103,4 @@ Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(fu
     Route::put('/verification/{pendaftaran}', 'verification')->middleware('auth:sanctum');
     // Delete Pendaftaran
     Route::delete('/delete/{pendaftaran}', 'destroy')->middleware('auth:sanctum');
-});
-
-// ---JADWAL--- //
-Route::prefix('jadwal')->controller(JadwalController::class)->group(function () {
-    // All Jadwals
-    Route::get('/', 'index');
-    // Show 1 Jadwal
-    Route::get('/{id}', 'show');
-    // Create Jadwal
-    Route::post('/create', 'store')->middleware('auth:sanctum');
-    // Edit Jadwal
-    Route::put('/edit/{jadwal}', 'update')->middleware('auth:sanctum');
-    // Delete Jadwal
-    Route::delete('/delete/{jadwal}', 'destroy')->middleware('auth:sanctum');
 });

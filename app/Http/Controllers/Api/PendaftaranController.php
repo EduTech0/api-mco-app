@@ -38,7 +38,7 @@ class PendaftaranController extends Controller
             'usia' => 'required|integer',
             'pekerjaan' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'nomor' => 'required|min:8|max:12|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'nomor' => 'required|min:8|max:14|regex:/^([0-9\s\-\+\(\)]*)$/',
             'olahraga' => 'required|string',
             'cabang' => 'required|string',
             'cedera' => 'integer',
@@ -55,7 +55,7 @@ class PendaftaranController extends Controller
             'status' => 'Success',
             'message' => 'Berhasil melakukan pendaftaran, Silahkan menunggu konfirmasi.',
             'data' => $pendaftaran,
-            'cedera' => $request->cedera
+            'cedera' => $request->cederas
         ]);
     }
 

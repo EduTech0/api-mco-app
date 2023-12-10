@@ -30,7 +30,7 @@ class CustomerController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'c_password' => 'required|same:password'
+            'passwordConfirmation' => 'required|same:password'
         ]);
         $validatedData['password'] = bcrypt($request->password);
 

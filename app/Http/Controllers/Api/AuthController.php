@@ -15,7 +15,7 @@ class AuthController extends Controller
             'name' => 'required|min:6',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'c_password' => 'required|same:password',
+            'repassword' => 'required|same:password',
         ]);
 
         $input = $request->all();

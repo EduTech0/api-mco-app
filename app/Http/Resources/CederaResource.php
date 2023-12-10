@@ -17,7 +17,7 @@ class CederaResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'harga' => $this->harga,
-            'images' => $this->images
+            'image' => $this->image
         ];
     }
 }

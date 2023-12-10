@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Cedera;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CederaSeeder extends Seeder

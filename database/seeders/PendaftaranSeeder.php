@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Cedera;
 use App\Models\Pendaftaran;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PendaftaranSeeder extends Seeder
