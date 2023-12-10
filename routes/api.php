@@ -100,7 +100,7 @@ Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(fu
     // Edit Pendaftaran
     Route::put('/edit/{pendaftaran}', 'update')->middleware('auth:sanctum');
     // Verifikasi Pendaftaran
-    Route::put('/verification/{pendaftaran}', 'verification')->middleware('auth:sanctum');
+    Route::put('/verification/{pendaftaran}', 'verification');//->middleware('auth:sanctum');
     // Delete Pendaftaran
     Route::delete('/delete/{pendaftaran}', 'destroy')->middleware('auth:sanctum');
 });
