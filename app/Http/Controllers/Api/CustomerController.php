@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\CustomerResource;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
@@ -17,7 +17,7 @@ class CustomerController extends Controller
     {
         $users = User::latest()->get();
 
-        return response()->json(['data' => $users]);
+        return CustomerResource::collection($users);
     }
 
     /**
@@ -39,7 +39,7 @@ class CustomerController extends Controller
         return response()->json([
             'status' => 'Success',
             'message' => 'Customer Created Successfully.',
-            'data' => $user
+            'data' => new CustomerResource($user)
         ]);
     }
 
@@ -48,12 +48,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validate Request //
+        // Validate Request
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
-            'tanggal_lahir' => 'date',
-            'jenis_kelamin' => 'string',
+            'tanggal_lahir' => '',
+            'jenis_kelamin' => '',
+            'role' => 'required',
             'address' => 'max:255'
         ]);
 
@@ -62,7 +63,7 @@ class CustomerController extends Controller
         return response()->json([
             'status' => 'Success',
             'message' => 'Customer Edited Successfully.',
-            'data' => $user
+            'data' => new CustomerResource($user)
         ]);
     }
 
@@ -83,7 +84,7 @@ class CustomerController extends Controller
     {
         $user = auth()->user();
         return response()->json([
-            'data' => new UserResource($user)
+            'data' => new CustomerResource($user)
         ]);
     }
 

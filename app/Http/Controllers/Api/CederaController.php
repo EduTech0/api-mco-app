@@ -62,29 +62,32 @@ class CederaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-        public function update(Request $request, Cedera $cedera)
-        {
-            // Validate Request
-            $validatedData = $request->validate([
-                'image' => 'max:2048',
-                'name' => 'required|string|max:255',
-                'harga' => 'required|integer'
-            ]);
-            // Request Image
-            if ($request->hasFile('image')) {
-                $filename = $request->image->getClientOriginalName();
-                $request->image->storeAs('public/cederas', $filename);
-                $data['image'] = asset('storage/cederas/' . $filename);;
-            }
+    public function update(Request $request, Cedera $cedera)
+    {
+        // Validate Request
+        $validatedData = $request->validate([
+            'image' => 'max:2048', // You might consider adding 'mimes:jpeg,png,jpg,gif' for specific image types
+            'name' => 'required|string|max:255',
+            'harga' => 'required|integer'
+        ]);
 
-            $cedera->update($validatedData);
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('public/cederas', $filename);
+            $validatedData['image'] = asset('storage/cederas/' . $filename);
+        }
 
-            return response()->json([
-                'status' => 'Success',
-                'message' => 'Cedera Updated Successfully.',
-                'data' => $cedera
-            ]);
+        // Update Cedera
+        $cedera->update($validatedData);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Cedera Updated Successfully.',
+            'data' => $cedera->fresh(), // Ensure you get the latest data
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.

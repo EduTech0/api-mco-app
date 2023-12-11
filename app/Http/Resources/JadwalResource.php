@@ -20,7 +20,10 @@ class JadwalResource extends JsonResource
             'tanggal_header' => Carbon::createFromDate($this->tanggal)->format('M d, Y'),
             'waktu' => $this->waktu_1 . ' - ' . $this->waktu_2,
             'kuota' => $this->kuota,
-            'tersisa' => $this->tersisa
+            'tersisa' => $this->tersisa,
+            'waktu_1' => $this->waktu_1,
+            'waktu_2' => $this->waktu_2,
+            'tanggal_edit' => Carbon::createFromDate($this->tanggal)->format('Y/m/d'),
         ];
     }
 }
