@@ -13,6 +13,14 @@ class PendaftaranResource extends JsonResource
      */
     public function toArray($request)
     {
+        $tarif = 0;
+        if ($this->cedera) {
+            foreach ($this->cedera as $cedera) {
+                $tarif += $cedera->harga;
+            }
+        }
+        $formattedTarif = number_format($tarif, 0, ',', '.');
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -31,6 +39,7 @@ class PendaftaranResource extends JsonResource
             'jumlah_terapi' => $this->jumlah_terapi,
             'status' => $this->status == 0 ? 'Dalam Antrian' : ($this->status == 1 ? 'Terverifikasi' : 'Selesai'),
             'cederas' => $this->cedera ? $this->cedera : null,
+            'tarif' => 'Rp ' . $formattedTarif
         ];
     }
 }

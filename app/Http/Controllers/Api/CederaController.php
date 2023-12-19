@@ -75,7 +75,7 @@ class CederaController extends Controller
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
             $request->image->storeAs('public/cederas', $filename);
-            $validatedData['image'] = asset('storage/cederas/' . $filename);
+            $validatedData['image'] = $filename;
         }
 
         // Update Cedera
