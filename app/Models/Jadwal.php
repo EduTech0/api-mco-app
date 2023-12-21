@@ -13,4 +13,9 @@ class Jadwal extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function pendaftarans()
+    {
+        return $this->hasMany(Pendaftaran::class, "pendaftaran_jadwal", "jadwal_id", "pendaftaran_id");
+    }
 }

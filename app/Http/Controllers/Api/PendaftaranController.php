@@ -6,6 +6,7 @@ use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PendaftaranResource;
+use App\Models\Jadwal;
 
 class PendaftaranController extends Controller
 {
@@ -49,13 +50,30 @@ class PendaftaranController extends Controller
         $validatedData['user_id'] = auth()->id();
 
         $pendaftaran = Pendaftaran::create($validatedData);
-        $pendaftaran->cedera()->attach($request->cederas);
+        $pendaftaran->cederas()->attach($request->cederas);
 
         return response()->json([
             'status' => 'Success',
             'message' => 'Berhasil melakukan pendaftaran, Silahkan menunggu konfirmasi.',
             'data' => $pendaftaran,
             'cedera' => $request->cederas
+        ]);
+    }
+
+    public function addJadwal(Request $request, Pendaftaran $pendaftaran)
+    {
+        $validatedData = $request->validate([
+            'id' => 'integer'
+        ]);
+
+        $pendaftaran->update($validatedData);
+        $jadwal = $pendaftaran->jadwal()->sync($request->jadwal);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil Memilih Jadwal',
+            'data' => $pendaftaran,
+            'jadwal' => Jadwal::findOrFail($request->jadwal)
         ]);
     }
 
@@ -96,12 +114,12 @@ class PendaftaranController extends Controller
         ]);
         $validatedData['user_id'] = auth()->id();
 
-        $pendaftaran->cedera()->sync($request->cederas);
+        $pendaftaran->cederas()->sync($request->cederas);
         $pendaftaran->update($validatedData);
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Berhasil mengubah data pendaftaran, Silahkan menunggu konfirmasi.',
+            'message' => 'Pendaftaran Updated Successfully.',
             'data' => $pendaftaran
         ]);
     }
@@ -124,7 +142,7 @@ class PendaftaranController extends Controller
      */
     public function destroy(Pendaftaran $pendaftaran)
     {
-        $pendaftaran->cedera()->detach();
+        $pendaftaran->cederas()->detach();
         $pendaftaran->delete();
 
         return response()->json([

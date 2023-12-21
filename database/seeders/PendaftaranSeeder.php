@@ -14,7 +14,7 @@ class PendaftaranSeeder extends Seeder
     {
         Pendaftaran::factory(80)->create()->each(function ($pendaftaran) {
             $randCederaCount = rand(1, 12);
-            $pendaftaran->cedera()->attach($randCederaCount);
+            $pendaftaran->cederas()->attach($randCederaCount);
         });
     }
 }

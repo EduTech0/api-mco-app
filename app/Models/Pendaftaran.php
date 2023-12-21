@@ -22,8 +22,12 @@ class Pendaftaran extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function cedera()
+    public function cederas()
     {
         return $this->belongsToMany(Cedera::class, "keluhans", "pendaftaran_id", "cedera_id");
+    }
+    public function jadwal()
+    {
+        return $this->belongsToMany(Jadwal::class, "pendaftaran_jadwal", "pendaftaran_id", "jadwal_id");
     }
 }
