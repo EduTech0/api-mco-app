@@ -17,6 +17,6 @@ class Cedera extends Model
 
     public function pendaftarans()
     {
-        return $this->hasMany(Pendaftaran::class, "keluhans", "cedera_id", "pendaftaran_id");
+        return $this->belongsToMany(Pendaftaran::class, "keluhans", "cedera_id", "pendaftaran_id");
     }
 }

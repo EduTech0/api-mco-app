@@ -73,7 +73,7 @@ class PendaftaranController extends Controller
             'status' => 'Success',
             'message' => 'Berhasil Memilih Jadwal',
             'data' => $pendaftaran,
-            'jadwal' => Jadwal::findOrFail($request->jadwal)
+            'jadwal' => $request->jadwal
         ]);
     }
 
