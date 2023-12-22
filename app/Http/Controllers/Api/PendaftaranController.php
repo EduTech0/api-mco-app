@@ -63,17 +63,16 @@ class PendaftaranController extends Controller
     public function addJadwal(Request $request, Pendaftaran $pendaftaran)
     {
         $validatedData = $request->validate([
-            'id' => 'integer'
+            'jadwal_id' => 'required|integer', // Assuming you have a field named 'jadwal_id' in your request
         ]);
 
-        $pendaftaran->update($validatedData);
-        $jadwal = $pendaftaran->jadwal()->sync($request->jadwal);
+        $pendaftaran->jadwal()->attach($validatedData['jadwal_id']);
 
         return response()->json([
             'status' => 'Success',
             'message' => 'Berhasil Memilih Jadwal',
-            'data' => $pendaftaran,
-            'jadwal' => $request->jadwal
+            'data' => $pendaftaran->fresh(), 
+            'jadwal' => Jadwal::findOrFail($validatedData['jadwal_id'])
         ]);
     }
 

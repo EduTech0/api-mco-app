@@ -16,6 +16,6 @@ class Jadwal extends Model
 
     public function pendaftarans()
     {
-        return $this->hasMany(Pendaftaran::class, "pendaftaran_jadwal", "jadwal_id", "pendaftaran_id");
+        return $this->belongsToMany(Pendaftaran::class, "pendaftaran_jadwal", "jadwal_id", "pendaftaran_id");
     }
 }
