@@ -38,8 +38,13 @@ class PendaftaranResource extends JsonResource
             'lama_cedera' => $this->lama_cedera,
             'jumlah_terapi' => $this->jumlah_terapi,
             'status' => $this->status == 0 ? 'Dalam Antrian' : ($this->status == 1 ? 'Terverifikasi' : 'Selesai'),
-            'cederas' => $this->cederas ? $this->cederas : null,
-            'tarif' => 'Rp ' . $formattedTarif
+            'tarif' => 'Rp ' . $formattedTarif,
+            'cederas' => $this->cederas ? $this->cederas->map(function ($item) {
+                return new CederaResource($item);
+            })->all() : 'null',
+            'jadwal' => $this->jadwal->map(function ($item) {
+                return new JadwalResource($item);
+            })->all(),
         ];
     }
 }

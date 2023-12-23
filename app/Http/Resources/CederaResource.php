@@ -13,10 +13,12 @@ class CederaResource extends JsonResource
      */
     public function toArray($request)
     {
+        $harga = $this->harga;
+        $formattedHarga = number_format($harga, 0, ',', '.');
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'harga' => $this->harga,
+            'harga' => 'Rp ' . $formattedHarga,
             'image' => $this->image
         ];
     }

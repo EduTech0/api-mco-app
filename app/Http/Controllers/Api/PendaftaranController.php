@@ -63,7 +63,7 @@ class PendaftaranController extends Controller
     public function addJadwal(Request $request, Pendaftaran $pendaftaran)
     {
         $validatedData = $request->validate([
-            'jadwal_id' => 'required|integer', // Assuming you have a field named 'jadwal_id' in your request
+            'jadwal_id' => 'required|integer',
         ]);
 
         $pendaftaran->jadwal()->attach($validatedData['jadwal_id']);
@@ -142,6 +142,7 @@ class PendaftaranController extends Controller
     public function destroy(Pendaftaran $pendaftaran)
     {
         $pendaftaran->cederas()->detach();
+        $pendaftaran->jadwal()->detach();
         $pendaftaran->delete();
 
         return response()->json([
