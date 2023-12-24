@@ -60,22 +60,6 @@ class PendaftaranController extends Controller
         ]);
     }
 
-    public function addJadwal(Request $request, Pendaftaran $pendaftaran)
-    {
-        $validatedData = $request->validate([
-            'jadwal_id' => 'required|integer',
-        ]);
-
-        $pendaftaran->jadwal()->attach($validatedData['jadwal_id']);
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Berhasil Memilih Jadwal',
-            'data' => $pendaftaran->fresh(), 
-            'jadwal' => Jadwal::findOrFail($validatedData['jadwal_id'])
-        ]);
-    }
-
     /**
      * Display the specified resource.
      */
@@ -114,12 +98,61 @@ class PendaftaranController extends Controller
         $validatedData['user_id'] = auth()->id();
 
         $pendaftaran->cederas()->sync($request->cederas);
+        $pendaftaran->jadwal()->sync($request->jadwal);
         $pendaftaran->update($validatedData);
 
         return response()->json([
             'status' => 'Success',
             'message' => 'Pendaftaran Updated Successfully.',
             'data' => $pendaftaran
+        ]);
+    }
+
+    public function addJadwal(Request $request, Pendaftaran $pendaftaran)
+    {
+        $validatedData = $request->validate([
+            'jadwal_id' => 'required|integer',
+        ]);
+
+        $pendaftaran->jadwal()->attach($validatedData['jadwal_id']);
+        $jadwal = Jadwal::findOrFail($validatedData['jadwal_id']);
+        $jadwal->update([
+            'tersisa' => $jadwal->tersisa - 1
+        ]);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil Memilih Jadwal',
+            'data' => new PendaftaranResource($pendaftaran),
+            'jadwal' => Jadwal::findOrFail($validatedData['jadwal_id'])
+        ]);
+    }
+
+    public function editJadwal(Request $request, Pendaftaran $pendaftaran)
+    {
+        $validatedData = $request->validate([
+            'jadwal_id' => 'required|integer',
+        ]);
+
+        $oldJadwal = $pendaftaran->jadwal()->first();
+        if ($oldJadwal) {
+            $oldJadwal->update([
+                'tersisa' => $oldJadwal->tersisa + 1
+            ]);
+        }
+
+        $pendaftaran->jadwal()->sync($validatedData['jadwal_id']);
+
+        $newJadwal = Jadwal::findOrFail($validatedData['jadwal_id']);
+        $newJadwal->update([
+            'tersisa' => $newJadwal->tersisa - 1
+        ]);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil Mengubah Jadwal',
+            'data' => new PendaftaranResource($pendaftaran),
+            'jadwal' => Jadwal::findOrFail($validatedData['jadwal_id'])
         ]);
     }
 

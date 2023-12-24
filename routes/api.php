@@ -97,10 +97,12 @@ Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(fu
     Route::get('/{id}', 'show');
     // Create Pendaftaran
     Route::post('/create', 'store')->middleware('auth:sanctum');
-    // Add Jadwal Pendaftaran
-    Route::put('/addjadwal/{pendaftaran}', 'addJadwal')->middleware('auth:sanctum');
     // Edit Pendaftaran
     Route::put('/edit/{pendaftaran}', 'update')->middleware('auth:sanctum');
+    // Add Jadwal Pendaftaran
+    Route::put('/addjadwal/{pendaftaran}', 'addJadwal')->middleware('auth:sanctum');
+    // Edit Jadwal Pendaftaran
+    Route::put('/editjadwal/{pendaftaran}', 'editJadwal')->middleware('auth:sanctum');
     // Verifikasi Pendaftaran
     Route::put('/verification/{pendaftaran}', 'verification');//->middleware('auth:sanctum');
     // Delete Pendaftaran
