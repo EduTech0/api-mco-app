@@ -98,10 +98,9 @@ class PendaftaranController extends Controller
         $validatedData['user_id'] = auth()->id();
 
         $pendaftaran->cederas()->sync($request->cederas);
-        $pendaftaran->jadwal()->sync($request->jadwal);
         $pendaftaran->update($validatedData);
 
-        return response()->json([
+        return response()->json([   
             'status' => 'Success',
             'message' => 'Pendaftaran Updated Successfully.',
             'data' => $pendaftaran
