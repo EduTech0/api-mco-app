@@ -105,6 +105,10 @@ Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(fu
     Route::put('/editjadwal/{pendaftaran}', 'editJadwal')->middleware('auth:sanctum');
     // Verifikasi Pendaftaran
     Route::put('/verification/{pendaftaran}', 'verification');//->middleware('auth:sanctum');
+    // Verifikasi Pembayaran
+    Route::put('/pembayaran/{pendaftaran}', 'pembayaran');//->middleware('auth:sanctum');
+    // Membuat Pembayaran
+    Route::post('/midtrans/{pendaftaran}', 'midtrans');//->middleware('auth:sanctum');
     // Delete Pendaftaran
     Route::delete('/delete/{pendaftaran}', 'destroy')->middleware('auth:sanctum');
 });

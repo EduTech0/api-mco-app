@@ -28,6 +28,7 @@ return new class extends Migration
             $table->enum('lama_cedera', ['<1 Minggu', '<1 Bulan', '<1 Tahun', '>1 Tahun']);
             $table->enum('jumlah_terapi', ['Belum', '1 Kali', '>1 Kali']);
             $table->boolean('status');
+            $table->boolean('status_pembayaran');
             $table->timestamps();
         });
     }
