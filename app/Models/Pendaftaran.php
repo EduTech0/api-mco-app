@@ -14,7 +14,8 @@ class Pendaftaran extends Model
         'id'
     ];
     protected $attributes = [
-        'status' => 0
+        'status' => 0,
+        'status_pembayaran' => 0
     ];
 
 
@@ -29,5 +30,9 @@ class Pendaftaran extends Model
     public function jadwal()
     {
         return $this->belongsToMany(Jadwal::class, "pendaftaran_jadwal", "pendaftaran_id", "jadwal_id");
+    }
+    public function midtrans()
+    {
+        return $this->belongsToMany(Midtrans::class, "midtrans", "pendaftaran_id");
     }
 }
