@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('midtrans', function (Blueprint $table) {
             $table->id('order_id');
             $table->integer('pendaftaran_id');
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('address');
+            $table->string('phone');
             $table->integer('total');
+            $table->enum('status', ['Unpaid', 'Paid']);
+            $table->string('snapToken')->nullable();
             $table->timestamps();
         });
     }

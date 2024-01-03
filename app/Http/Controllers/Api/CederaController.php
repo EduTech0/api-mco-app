@@ -42,7 +42,7 @@ class CederaController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Cedera Created Successfully.',
+            'message' => 'Cedera Created Successfully',
             'data' => $cedera
         ]);
     }
@@ -66,28 +66,25 @@ class CederaController extends Controller
     {
         // Validate Request
         $validatedData = $request->validate([
-            'image' => 'max:2048', // You might consider adding 'mimes:jpeg,png,jpg,gif' for specific image types
+            'image' => 'max:2048',
             'name' => 'required|string|max:255',
             'harga' => 'required|integer'
         ]);
-
-        // Handle Image Upload
+        // Request Image
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
             $request->image->storeAs('public/cederas', $filename);
             $validatedData['image'] = $filename;
         }
 
-        // Update Cedera
         $cedera->update($validatedData);
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Cedera Updated Successfully.',
-            'data' => $cedera->fresh(), // Ensure you get the latest data
+            'message' => 'Cedera Updated Successfully',
+            'data' => $cedera->fresh(),
         ]);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -99,7 +96,7 @@ class CederaController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Cedera Deleted Successfully.'
+            'message' => 'Cedera Deleted Successfully'
         ]);
     }
 }

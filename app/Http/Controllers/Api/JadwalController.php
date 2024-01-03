@@ -37,7 +37,7 @@ class JadwalController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Jadwal Created Successfully.',
+            'message' => 'Jadwal Created Successfully',
             'data' => new JadwalResource($jadwal)
         ]);
     }
@@ -72,7 +72,7 @@ class JadwalController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Jadwal Updated Successfully.',
+            'message' => 'Jadwal Updated Successfully',
             'data' => new JadwalResource($jadwal)
         ]);
     }
@@ -86,7 +86,7 @@ class JadwalController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Jadwal Deleted Successfully.'
+            'message' => 'Jadwal Deleted Successfully'
         ]);
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Pendaftaran;
+use App\Models\Jadwal;
+use App\Models\Midtrans;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PendaftaranResource;
-use App\Models\Jadwal;
-use App\Models\Midtrans;
 
 class PendaftaranController extends Controller
 {
@@ -23,7 +23,7 @@ class PendaftaranController extends Controller
 
     public function userRegist()
     {
-        return PendaftaranResource::collection(Pendaftaran::where('user_id', auth()->user()->id)->get());
+        return PendaftaranResource::collection(Pendaftaran::where('user_id', auth()->user()->id)->latest()->get());
     }
 
     /**
@@ -55,7 +55,7 @@ class PendaftaranController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Berhasil melakukan pendaftaran, Silahkan menunggu konfirmasi.',
+            'message' => 'Berhasil melakukan pendaftaran, Silahkan menunggu konfirmasi',
             'data' => $pendaftaran,
             'cedera' => $request->cederas
         ]);
@@ -103,7 +103,7 @@ class PendaftaranController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Pendaftaran Updated Successfully.',
+            'message' => 'Pendaftaran Updated Successfully',
             'data' => $pendaftaran
         ]);
     }
@@ -164,42 +164,8 @@ class PendaftaranController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Berhasil Memverifikasi Pendaftaran.',
+            'message' => 'Berhasil Memverifikasi Pendaftaran',
             'data' => $pendaftaran
-        ]);
-    }
-
-    public function pembayaran(Request $request, Pendaftaran $pendaftaran)
-    {
-        // Validate Request
-        $validatedData = $request->validate([
-            'pendaftaran_id' => 'integer'
-        ]);
-
-        $pendaftaran->update($validatedData);
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Berhasil Memverifikasi Pembayaran',
-            'data' => $pendaftaran
-        ]);
-    }
-
-    public function midtrans(Request $request, Pendaftaran $pendaftaran)
-    {
-        // Validate Request
-        $validatedData = $request->validate([
-            'pendaftaran_id' => 'integer',
-            'total' => 'required|integer'
-        ]);
-        $validatedData['pendaftaran_id'] = $pendaftaran->id;
-
-        $data = Midtrans::create($validatedData);
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Berhasil Membuat Pembayaran',
-            'data' => $data,
         ]);
     }
 
@@ -214,7 +180,7 @@ class PendaftaranController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Data pendaftaran Deleted Successfully.'
+            'message' => 'Pendaftaran Deleted Successfully'
         ]);
     }
 }

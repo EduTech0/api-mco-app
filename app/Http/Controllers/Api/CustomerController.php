@@ -38,7 +38,7 @@ class CustomerController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Customer Created Successfully.',
+            'message' => 'Customer Created Successfully',
             'data' => new CustomerResource($user)
         ]);
     }
@@ -62,7 +62,7 @@ class CustomerController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Customer Edited Successfully.',
+            'message' => 'Customer Edited Successfully',
             'data' => new CustomerResource($user)
         ]);
     }
@@ -76,7 +76,7 @@ class CustomerController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Customer Deleted Successfully.'
+            'message' => 'Customer Deleted Successfully'
         ]);
     }
 
@@ -90,7 +90,7 @@ class CustomerController extends Controller
 
     public function editProfile(Request $request)
     {
-        // Validate Request //
+        // Validate Request
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
@@ -105,7 +105,7 @@ class CustomerController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Profile Edited Successfully.',
+            'message' => 'Profile Edited Successfully',
             'data' => $data
         ]);
     }

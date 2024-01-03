@@ -4,9 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CederaController;
-use App\Http\Controllers\Api\PendaftaranController;
-use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\JadwalController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\PembayaranController;
+use App\Http\Controllers\Api\PendaftaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,11 +105,21 @@ Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(fu
     // Edit Jadwal Pendaftaran
     Route::put('/editjadwal/{pendaftaran}', 'editJadwal')->middleware('auth:sanctum');
     // Verifikasi Pendaftaran
-    Route::put('/verification/{pendaftaran}', 'verification');//->middleware('auth:sanctum');
-    // Verifikasi Pembayaran
-    Route::put('/pembayaran/{pendaftaran}', 'pembayaran');//->middleware('auth:sanctum');
-    // Membuat Pembayaran
-    Route::post('/midtrans/{pendaftaran}', 'midtrans');//->middleware('auth:sanctum');
+    Route::put('/verification/{pendaftaran}', 'verification'); //->middleware('auth:sanctum');
     // Delete Pendaftaran
     Route::delete('/delete/{pendaftaran}', 'destroy')->middleware('auth:sanctum');
+});
+
+// ---PEMBAYARAN--- //
+Route::prefix('pembayaran')->controller(PembayaranController::class)->group(function () {
+    // Create Pembayaran
+    Route::post('/midtrans/{pendaftaran}', 'checkout');
+    // Checkout
+    Route::post('/checkout', 'checkout');
+    // Show Pembayaran
+    Route::get('/{pendaftaran}', 'show');
+    // Callback
+    Route::get('/callback/{pendaftaran}/{id}', 'callback');
+    // Invoice
+    Route::get('/invoice/{id}', 'invoice');
 });

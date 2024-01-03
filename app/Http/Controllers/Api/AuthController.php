@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Register Successfully.',
+            'message' => 'Register Successfully',
             'data' => $data
         ]);
     }
@@ -51,13 +51,13 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => 'Success',
-                'message' => 'Login Successfully.',
+                'message' => 'Login Successfully',
                 'data' => $success
             ]);
         } else {
             return response()->json([
                 'status' => 'Failed',
-                'message' => 'Email or Password Failed, Please try again later.'
+                'message' => 'Email or Password Failed, Please try again later'
             ]);
         }
     }
@@ -68,7 +68,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Logout Successfully.'
+            'message' => 'Logout Successfully'
         ]);
     }
 }
