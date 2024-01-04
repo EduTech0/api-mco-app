@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class Pendaftaran extends Model
 {
@@ -13,10 +14,20 @@ class Pendaftaran extends Model
     protected $guarded = [
         'id'
     ];
-    protected $attributes = [
-        'status' => 0,
-        'status_pembayaran' => 0
-    ];
+
+    protected static function booted()
+    {
+        static::creating(function ($pendaftaran) {
+            $pendaftaran->slug = $pendaftaran->slug ?: Str::uuid()->toString();
+            $pendaftaran->status_pendaftaran = $pendaftaran->status_pendaftaran ?: 0;
+            $pendaftaran->status_pembayaran = $pendaftaran->status_pembayaran ?: 0;
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
 
     public function user()
@@ -31,8 +42,8 @@ class Pendaftaran extends Model
     {
         return $this->belongsToMany(Jadwal::class, "pendaftaran_jadwal", "pendaftaran_id", "jadwal_id");
     }
-    public function midtrans()
+    public function pembayaran()
     {
-        return $this->belongsToMany(Midtrans::class, "midtrans", "pendaftaran_id");
+        return $this->belongsToMany(Pembayaran::class, "pembayaran_pendaftaran", "pendaftaran_id", "pembayaran_id");
     }
 }

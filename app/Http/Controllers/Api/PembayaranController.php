@@ -2,23 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Midtrans;
+use App\Models\Pembayaran;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PembayaranController extends Controller
 {
-    public function show(Pendaftaran $pendaftaran)
-    {
-        $pembayaran = Midtrans::where('pendaftaran_id', $pendaftaran->id)
-            ->firstOrFail();
-
-        return response()->json([
-            'data' => $pembayaran,
-        ]);
-    }
-
     public function checkout(Request $request, Pendaftaran $pendaftaran)
     {
         $validatedData = $request->validate([
@@ -29,7 +19,6 @@ class PembayaranController extends Controller
             'phone' => 'required|min:8|max:14|regex:/^([0-9\s\-\+\(\)]*)$/',
             'total' => 'required|integer'
         ]);
-        $validatedData['pendaftaran_id'] = $pendaftaran->id;
         $validatedData['last_name'] = '';
         $validatedData['status'] = 'Unpaid';
 
@@ -57,7 +46,8 @@ class PembayaranController extends Controller
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $validatedData['snapToken'] = $snapToken;
 
-        $order = Midtrans::create($validatedData);
+        $order = Pembayaran::create($validatedData);
+        $pendaftaran->pembayaran()->attach($order->id);
 
         return response()->json([
             'status' => 'Success',
@@ -66,31 +56,25 @@ class PembayaranController extends Controller
         ]);
     }
 
-    public function callback(Pendaftaran $pendaftaran, $id)
+    public function callback(Pembayaran $pembayaran)
     {
-        $order = Midtrans::find($id);
-
-        $pendaftaran->update([
-            'status_pembayaran' => 1
-        ]);
-
-        $order->update([
+        $pembayaran->update([
             'status' => 'Paid'
         ]);
 
         return response()->json([
             'status' => 'Success',
             'message' => 'Pembayaran Berhasil',
-            'data' => $pendaftaran
+            'data' => $pembayaran
         ]);
     }
 
     public function invoice($id)
     {
-        $order = Midtrans::find($id);
+        $pembayaran = Pembayaran::find($id);
 
         return response()->json([
-            'data' => $order,
+            'data' => $pembayaran,
         ]);
     }
 }

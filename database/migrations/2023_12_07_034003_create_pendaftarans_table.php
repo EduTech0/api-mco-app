@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->integer('user_id');
             $table->string('nama_lengkap');
             $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan']);
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->string('penyebab');
             $table->enum('lama_cedera', ['<1 Minggu', '<1 Bulan', '<1 Tahun', '>1 Tahun']);
             $table->enum('jumlah_terapi', ['Belum', '1 Kali', '>1 Kali']);
-            $table->boolean('status');
+            $table->boolean('status_pendaftaran');
             $table->boolean('status_pembayaran');
             $table->timestamps();
         });

@@ -64,10 +64,8 @@ class PendaftaranController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Pendaftaran $pendaftaran)
     {
-        $pendaftaran = Pendaftaran::findOrFail($id);
-
         return response()->json([
             'data' => new PendaftaranResource($pendaftaran),
         ]);
@@ -94,7 +92,7 @@ class PendaftaranController extends Controller
             'penyebab' => 'required|string|max:255',
             'lama_cedera' => 'required|string',
             'jumlah_terapi' => 'required|string',
-            'status' => 'integer'
+            'status_pendaftaran' => 'integer'
         ]);
         $validatedData['user_id'] = auth()->id();
 

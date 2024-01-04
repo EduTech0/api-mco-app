@@ -31,7 +31,7 @@ class PendaftaranFactory extends Factory
             'penyebab' => fake()->sentence(),
             'lama_cedera' => fake()->randomElement(['<1 Minggu', '<1 Bulan', '<1 Tahun', '>1 Tahun']),
             'jumlah_terapi' => fake()->randomElement(['Belum', '1 Kali', '>1 Kali']),
-            'status' => fake()->randomElement([0, 1, 2])
+            'status_pendaftaran' => fake()->randomElement([0, 1, 2])
         ];
     }
 }

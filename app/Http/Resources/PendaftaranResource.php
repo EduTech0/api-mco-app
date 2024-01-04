@@ -23,6 +23,7 @@ class PendaftaranResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
             'user_id' => $this->user_id,
             'nama_lengkap' => $this->nama_lengkap,
             'jenis_kelamin' => $this->jenis_kelamin,
@@ -37,16 +38,17 @@ class PendaftaranResource extends JsonResource
             'penyebab' => $this->penyebab,
             'lama_cedera' => $this->lama_cedera,
             'jumlah_terapi' => $this->jumlah_terapi,
-            'status' => $this->status == 0 ? 'Dalam Antrian' : ($this->status == 1 ? 'Terverifikasi' : 'Selesai'),
+            'status' => $this->status_pendaftaran == 0 ? 'Dalam Antrian' : ($this->status_pendaftaran == 1 ? 'Terverifikasi' : 'Selesai'),
             'status_pembayaran' => $this->status_pembayaran == 0 ? 'Belum Dibayar' : 'Sudah Dibayar',
             'tarif' => 'Rp ' . $formattedTarif,
             'total' => $tarif,
             'cederas' => $this->cederas ? $this->cederas->map(function ($item) {
                 return new CederaResource($item);
             })->all() : 'null',
-            'jadwal' => $this->jadwal->map(function ($item) {
+            'jadwal' => $this->jadwal ? $this->jadwal->map(function ($item) {
                 return new JadwalResource($item);
-            })->all(),
+            })->all() : 'null',
+            'pembayaran' => $this->pembayaran ? new PembayaranResource($this->pembayaran->first()) : 'null',
         ];
     }
 }

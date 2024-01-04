@@ -95,31 +95,27 @@ Route::prefix('pendaftaran')->controller(PendaftaranController::class)->group(fu
     // Pendaftaran berdasarkan User
     Route::get('/ticket', 'userRegist')->middleware('auth:sanctum');
     // Show 1 Pendaftaran
-    Route::get('/{id}', 'show');
+    Route::get('/{pendaftaran:slug}', 'show');
     // Create Pendaftaran
     Route::post('/create', 'store')->middleware('auth:sanctum');
     // Edit Pendaftaran
-    Route::put('/edit/{pendaftaran}', 'update')->middleware('auth:sanctum');
+    Route::put('/edit/{pendaftaran:slug}', 'update')->middleware('auth:sanctum');
     // Add Jadwal Pendaftaran
-    Route::put('/addjadwal/{pendaftaran}', 'addJadwal')->middleware('auth:sanctum');
+    Route::put('/addjadwal/{pendaftaran:slug}', 'addJadwal')->middleware('auth:sanctum');
     // Edit Jadwal Pendaftaran
-    Route::put('/editjadwal/{pendaftaran}', 'editJadwal')->middleware('auth:sanctum');
+    Route::put('/editjadwal/{pendaftaran:slug}', 'editJadwal')->middleware('auth:sanctum');
     // Verifikasi Pendaftaran
-    Route::put('/verification/{pendaftaran}', 'verification'); //->middleware('auth:sanctum');
+    Route::put('/verification/{pendaftaran:slug}', 'verification'); //->middleware('auth:sanctum');
     // Delete Pendaftaran
-    Route::delete('/delete/{pendaftaran}', 'destroy')->middleware('auth:sanctum');
+    Route::delete('/delete/{pendaftaran:slug}', 'destroy')->middleware('auth:sanctum');
 });
 
 // ---PEMBAYARAN--- //
 Route::prefix('pembayaran')->controller(PembayaranController::class)->group(function () {
-    // Create Pembayaran
-    Route::post('/midtrans/{pendaftaran}', 'checkout');
     // Checkout
-    Route::post('/checkout', 'checkout');
-    // Show Pembayaran
-    Route::get('/{pendaftaran}', 'show');
+    Route::post('/checkout/{pendaftaran:slug}', 'checkout');
     // Callback
-    Route::get('/callback/{pendaftaran}/{id}', 'callback');
+    Route::put('/callback/{pembayaran}', 'callback');
     // Invoice
     Route::get('/invoice/{id}', 'invoice');
 });

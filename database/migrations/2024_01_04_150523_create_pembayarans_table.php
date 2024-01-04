@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('midtrans', function (Blueprint $table) {
-            $table->id('order_id');
-            $table->integer('pendaftaran_id');
+        Schema::create('pembayarans', function (Blueprint $table) {
+            $table->id();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('address');
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('midtrans');
+        Schema::dropIfExists('pembayarans');
     }
 };
