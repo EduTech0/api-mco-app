@@ -157,7 +157,7 @@ class PendaftaranController extends Controller
     public function verification(Pendaftaran $pendaftaran)
     {
         $pendaftaran->update([
-            'status' => 1
+            'status_pendaftaran' => 1
         ]);
 
         return response()->json([
