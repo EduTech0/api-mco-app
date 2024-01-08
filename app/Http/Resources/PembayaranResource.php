@@ -19,7 +19,7 @@ class PembayaranResource extends JsonResource
             'address' => $this->address,
             'phone' => $this->phone,
             'total' => $this->total,
-            'status' => $this->status == 'Unpaid' ? 'Belum Dibayar' : 'Sudah Dibayar',
+            'status' => $this->status,
             'snapToken' => $this->snapToken
         ];
     }

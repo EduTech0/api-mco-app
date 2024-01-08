@@ -56,10 +56,14 @@ class PembayaranController extends Controller
         ]);
     }
 
-    public function callback(Pembayaran $pembayaran)
+    public function callback(Pembayaran $pembayaran, Pendaftaran $pendaftaran)
     {
         $pembayaran->update([
             'status' => 'Paid'
+        ]);
+
+        $pendaftaran->update([
+            'status_pembayaran' => 1
         ]);
 
         return response()->json([

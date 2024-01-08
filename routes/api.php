@@ -115,7 +115,7 @@ Route::prefix('pembayaran')->controller(PembayaranController::class)->group(func
     // Checkout
     Route::post('/checkout/{pendaftaran:slug}', 'checkout');
     // Callback
-    Route::put('/callback/{pembayaran}', 'callback');
+    Route::put('/callback/{pembayaran}/{pendaftaran:slug}', 'callback');
     // Invoice
     Route::get('/invoice/{id}', 'invoice');
 });
