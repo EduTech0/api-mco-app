@@ -25,7 +25,8 @@ class AuthController extends Controller
         $data = [
             'token' => $token,
             'name' => $user->name,
-            'email' => $user->email
+            'email' => $user->email,
+            'role' => $user->role,
         ];
 
         Auth::login($user);
@@ -48,6 +49,7 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             $success['token'] =  $user->createToken('MyApp')->plainTextToken;
             $success['name'] =  $user->name;
+            $success['role'] =  $user->role;
 
             return response()->json([
                 'status' => 'Success',

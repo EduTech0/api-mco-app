@@ -119,3 +119,11 @@ Route::prefix('pembayaran')->controller(PembayaranController::class)->group(func
     // Invoice
     Route::get('/invoice/{id}', 'invoice');
 });
+
+// ---DASHBOARD--- //
+Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/customers', [CustomerController::class, 'index']);
+    Route::get('/cederas', [CederaController::class, 'index']);
+    Route::get('/jadwals', [JadwalController::class, 'index']);
+    Route::get('/pendaftarans', [PendaftaranController::class, 'index']);
+});
